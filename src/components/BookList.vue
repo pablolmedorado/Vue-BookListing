@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>{{ title }}</h1>
+    <book-form @addBook="appendBook"></book-form>
     <ul>
       <book-item v-for="book in books" :book="book" :key="book.title"></book-item>
     </ul>
@@ -9,9 +10,15 @@
 
 <script>
 import BookItem from "./BookItem";
+import BookForm from "./BookForm";
 export default {
   name: "BookList",
-  components: { BookItem },
+  components: { BookItem, BookForm },
+  methods: {
+    appendBook(bookTitle, bookAuthor) {
+      this.books.push({ title: bookTitle, author: bookAuthor });
+    }
+  },
   data() {
     return {
       title: "All Books",
